@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping List App</title>
+  <link rel="stylesheet" href="main.css">
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <div id="shopping-list">
+
+    <h1>shopping list app</h1>
+
+    <ul>
+      <li v-for="(item, index) in items" @click="changePurchased(item)" :class="{strikeout: item.purchased}">{{ item.label }}</li>
+    </ul>
+
+    <div class="add-item-form"  v-if="state === 'edit'">
+
+      <input v-model="newItem" @keyup.enter="addItem" type="text" :placeholder="holder" autofocus>
+
+        <div class="btn-wrapper">
+          <button class="btn btn-primary" @click="addItem">save new item</button>
+  
+          <button class="btn btn-cancel" @click="changeState('hold')">cancel</button>
+        </div>
+
+    </div>
+
+    <div class="btn-wrapper btn-wrapper-out" v-if="state === 'hold'">
+      <button class="btn btn-add" @click="changeState('edit')">add new item</button>
+      <button class="btn btn-create" @click="newList(); changeState('edit');">create new list</button>
+    </div>
+    
+  </div>
+
+  <script src="main.js"></script>
+
+</body>
+</html>
